@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Checkbox, Input, Button, AutoComplete } from "antd";
+import { Checkbox, Input, Button } from "antd";
 const InputGroup = Input.Group;
 
 class ContactPage extends Component {

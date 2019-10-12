@@ -1,4 +1,4 @@
-# PlanAhead NUS Module Planner
+# WebInsta
 
 This project is built with React framework with Express backend. React-Router is also used for routing.
 
