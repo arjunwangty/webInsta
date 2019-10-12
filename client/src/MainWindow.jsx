@@ -56,7 +56,7 @@ class MainWindow extends Component {
   handleSubmit() {
     const { url, aboutUs, email, mobile } = this.state;
     axios
-      .post("process.env.PORT/userinfo", { url, aboutUs, email, mobile })
+      .post("/userinfo", { url, aboutUs, email, mobile })
       .then(function(response) {
         console.log(response);
       })
