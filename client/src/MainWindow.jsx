@@ -4,7 +4,7 @@ import InputPannel from "./main/InputPannel";
 import AboutUs from "./main/AboutUs";
 import ContactPage from "./main/ContactPage";
 
-import { Tabs, Descriptions, Button, message } from "antd";
+import { Tabs, Descriptions, Button, message, Input } from "antd";
 
 const { TabPane } = Tabs;
 
@@ -17,6 +17,7 @@ class MainWindow extends Component {
       aboutUs: "",
       email: "",
       mobile: "",
+      sendTo: "",
       urlProcessed: false
     };
   }
@@ -46,6 +47,12 @@ class MainWindow extends Component {
     });
   }
 
+  handleEmailChange(event) {
+    this.setState({
+      sendTo: event.target.value
+    });
+  }
+
   handleBack() {
     const prev = this.state.activeTab - 1;
     this.setState({
@@ -53,10 +60,16 @@ class MainWindow extends Component {
     });
   }
 
+  handleNext() {
+    this.setState({
+      activeTab: "4"
+    });
+  }
+
   handleSubmit() {
-    const { url, aboutUs, email, mobile } = this.state;
+    const { url, aboutUs, email, mobile, sendTo } = this.state;
     axios
-      .post("/userinfo", { url, aboutUs, email, mobile })
+      .post("/userinfo", { url, aboutUs, email, mobile, sendTo })
       .then(function(response) {
         console.log(response);
       })
@@ -124,9 +137,31 @@ class MainWindow extends Component {
                 <Button
                   key="submit"
                   type="primary"
-                  onClick={this.handleSubmit.bind(this)}
+                  onClick={this.handleNext.bind(this)}
                 >
                   Generate My Webpage
+                </Button>
+              </div>
+            </TabPane>
+            <TabPane tab="Step 4" key="4">
+              <div style={{ marginBottom: "20px" }}>
+                <h3>
+                  Your request will be processed, please enter a valid email
+                  address and we will send you a zip file within minutes
+                </h3>
+                <Input
+                  style={{ width: "60%" }}
+                  type="email"
+                  placeholder="Your email address here"
+                  value={this.state.sendTo}
+                  onChange={this.handleEmailChange.bind(this)}
+                />
+                <Button
+                  key="submit"
+                  type="primary"
+                  onClick={this.handleSubmit.bind(this)}
+                >
+                  Send me the files
                 </Button>
               </div>
             </TabPane>
